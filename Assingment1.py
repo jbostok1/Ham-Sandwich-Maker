@@ -45,7 +45,12 @@ class SandwichMachine:
 
     def check_resources(self, ingredients):
         """Returns True when order can be made, False if ingredients are insufficient."""
-
+        """this is a for loop that checkls if there is a resource, if not, it returns a statement saying what is missing."""
+        for item in ingredients:
+            if ingredients[item] > self.machine_resource[item]:
+                print(f"Sorry there is not enough {item}.")
+                return False
+        return True
     def process_coins(self):
         """Returns the total calculated from coins inserted.
            Hint: include input() function here, e.g. input("how many quarters?: ")"""
