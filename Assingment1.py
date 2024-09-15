@@ -1,40 +1,3 @@
-### Data ###
-
-recipes = {
-    "small": {
-        "ingredients": {
-            "bread": 2,  ## slice
-            "ham": 4,  ## slice
-            "cheese": 4,  ## ounces
-        },
-        "cost": 1.75,
-    },
-    "medium": {
-        "ingredients": {
-            "bread": 4,  ## slice
-            "ham": 6,  ## slice
-            "cheese": 8,  ## ounces
-        },
-        "cost": 3.25,
-    },
-    "large": {
-        "ingredients": {
-            "bread": 6,  ## slice
-            "ham": 8,  ## slice
-            "cheese": 12,  ## ounces
-        },
-        "cost": 5.5,
-    }
-}
-
-resources = {
-    "bread": 12,  ## slice
-    "ham": 18,  ## slice
-    "cheese": 24,  ## ounces
-}
-
-
-
 ### Complete functions ###
 
 class SandwichMachine:
@@ -72,7 +35,7 @@ class SandwichMachine:
 
         if coins >= cost:
             change = round(coins - cost, 2)
-            if change > 0:
+            if change >= 0:
                 print(f"here is ${change} in change.")
             return True
         else:
@@ -84,7 +47,7 @@ class SandwichMachine:
            Hint: no output"""
         for item in order_ingredients:
             self.machine_resources[item] -= order_ingredients[item]
-        print(f"{sandwich_size.capitalize()} sandwich is ready! Enjoy!")
+        print(f"{sandwich_size.capitalize()} sandwich is ready! Bon appetit!")
 
     def sandwich_Report(self):
         """Displays current ingredients"""
@@ -132,7 +95,7 @@ while True:
     if choice == "off":
         break
     elif choice == "report":
-        sandwich_machine.sandwich.report()
+        sandwich_machine.sandwich_Report()
     elif choice in recipes:
         sandwich = recipes[choice]
         if sandwich_machine.check_resources(sandwich["ingredients"]):
