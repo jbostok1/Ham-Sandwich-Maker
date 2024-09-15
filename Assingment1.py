@@ -48,7 +48,7 @@ class SandwichMachine:
         """Returns True when order can be made, False if ingredients are insufficient."""
         """this is a for loop that checkls if there is a resource, if not, it returns a statement saying what is missing."""
         for item in ingredients:
-            if ingredients[item] > self.machine_resource[item]:
+            if ingredients[item] > self.machine_resources[item]:
                 print(f"Sorry there is not enough {item}.")
                 return False
         return True
@@ -132,7 +132,7 @@ while True:
     if choice == "off":
         break
     elif choice == "report":
-        sandwich_machine.report()
+        sandwich_machine.sandwich.report()
     elif choice in recipes:
         sandwich = recipes[choice]
         if sandwich_machine.check_resources(sandwich["ingredients"]):
