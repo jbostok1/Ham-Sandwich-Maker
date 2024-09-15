@@ -34,6 +34,7 @@ resources = {
 }
 
 
+
 ### Complete functions ###
 
 class SandwichMachine:
@@ -81,5 +82,64 @@ class SandwichMachine:
     def make_sandwich(self, sandwich_size, order_ingredients):
         """Deduct the required ingredients from the resources.
            Hint: no output"""
+        for item in order_ingredients:
+            self.machine_resources[item] -= order_ingredients[item]
+        print(f"{sandwich_size.capitalize()} sandwich is ready! Enjoy!")
 
-### Make an instance of SandwichMachine class and write the rest of the codes ###
+    def sandwich_Report(self):
+        """Displays current ingredients"""
+        print(f"Bread: {self.machine_resources['bread']} slice(s)")
+        print(f"Ham: {self.machine_resources['ham']} slice(s)")
+        print(f"Cheese: {self.machine_resources['cheese']} ounces")
+
+machine_resources = {
+    "bread": 12,  # slice
+    "ham": 18,  # slice
+    "cheese": 24  # ounces
+}
+sandwich_machine = SandwichMachine(machine_resources)
+
+# Sample interaction loop
+recipes = {
+    "small": {
+        "ingredients": {
+            "bread": 2,  # slice
+            "ham": 4,  # slice
+            "cheese": 4,  # ounces
+        },
+        "cost": 1.75,
+    },
+    "medium": {
+        "ingredients": {
+            "bread": 4,  # slice
+            "ham": 6,  # slice
+            "cheese": 8,  # ounces
+        },
+        "cost": 3.25,
+    },
+    "large": {
+        "ingredients": {
+            "bread": 6,  # slice
+            "ham": 8,  # slice
+            "cheese": 12,  # ounces
+        },
+        "cost": 5.5,
+    }
+}
+
+while True:
+    choice = input("What would you like? (small/ medium/ large/ off/ report): ").lower()
+    if choice == "off":
+        break
+    elif choice == "report":
+        sandwich_machine.report()
+    elif choice in recipes:
+        sandwich = recipes[choice]
+        if sandwich_machine.check_resources(sandwich["ingredients"]):
+            payment = sandwich_machine.process_coins()
+            if sandwich_machine.transaction_result(payment, sandwich["cost"]):
+                sandwich_machine.make_sandwich(choice, sandwich["ingredients"])
+    else:
+        print("Invalid choice. Please select again.")
+
+
